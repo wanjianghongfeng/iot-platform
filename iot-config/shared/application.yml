@@ -1,0 +1,94 @@
+server:
+  tomcat:
+    basedir: /home/tmp
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1  
+    leaseExpirationDurationInSeconds: 2
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://${REGISTRY_SERVER_USER:user}:${REGISTRY_SERVER_PASSWORD:password}@${REGISTRY_SERVER_IP:127.0.0.1}:${REGISTRY_SERVER_PORT:9001}/eureka/
+feign: 
+  hystrix: 
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        timeout: 
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
+
+spring:
+  datasource:
+    url: jdbc:mysql://${DB_IP:47.100.242.161}:${DB_PORT:3306}/${DB_DATABASE:lmp}?allowMultiQueries=true&rewriteBatchedStatements=true&autoReconnect=true&autoReconnectForPools=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: ${DB_PWD:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver 
+    initial-size: 50
+    minIdle: 5
+    maxActive: 100
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 100
+    filters: stat,wall,log4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=3000
+    useGlobalDataSourceStat: true
+  rabbitmq:
+    host: ${RABBIT_HOST:47.100.242.161}
+    port: ${RABBIT_PORT:5672}
+    username: ${RABBIT_USER:guest}
+    password: ${RABBIT_PASSWORD:guest}
+    virtual-host: /    
+  
+  sleuth:
+    sampler:
+      percentage: 1
+    integration:
+      enabled: false
+    scheduled:
+      skip-pattern: "^org.*HystrixStreamTask$"
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 20MB
+      location: /tmp
+  redis:
+    database: 1
+    host: ${REDIS_HOST:47.100.242.161}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PWD:47100242161}
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+    timeout: 5000 
+authserver:
+    hostname: ${AUTH_HOST:127.0.0.1}
+    port: ${AUTH_PORT:9004}
+    contextPath: /uaa
+    globalUrl: http://${GATEWAY_SERVER_IP:127.0.0.1}:${GATEWAY_SERVER_PORT:9003}/uaa/oauth/token
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/users/current
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

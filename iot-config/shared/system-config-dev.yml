@@ -1,0 +1,20 @@
+init:
+  ftpIp: 47.100.242.161
+  ftpUser: administrator
+  ftpPwd: Wj2018!@#
+  ftpPort: 21
+  #系统标题
+  system_title: 管理平台
+  #logo地址，多个竖线分隔
+  logo_path: logo.png
+  #文件存储的物理路径
+  uploadPath: /usr/local/uploadFile/
+  #web端mq连接地址
+  rabbitClientUrl: http://47.100.242.161:15674/stomp
+  #开发环境为空，生产环境为：dist/
+  web_res_path: dist/
+  rabbitmq: 
+    host: 47.100.242.161
+    port: 5672
+    username: guest
+    password: guest

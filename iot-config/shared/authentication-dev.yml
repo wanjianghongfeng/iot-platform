@@ -1,0 +1,10 @@
+server:
+  port: 9004
+spring:
+  application:
+    name: authentication
+info:
+  app:
+    name: ${spring.application.name}
+    artifactId: '@project.artifactId@'
+    version: '@project.version@'

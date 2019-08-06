@@ -1,0 +1,45 @@
+server:
+  port: ${CONFIG_SERVER_PORT:9002}
+eureka:
+  instance:
+    hostname: config
+    prefer-ip-address: true
+    ip-address: ${CONFIG_SERVER_IP:127.0.0.1}
+    metadata-map:
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+  client:
+    service-url:
+      defaultZone: http://${REGISTRY_SERVER_USER:user}:${REGISTRY_SERVER_PASSWORD:password}@${REGISTRY_SERVER_IP:127.0.0.1}:${REGISTRY_SERVER_PORT:9001}/eureka/
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:./shared
+      username: ${spring.security.user.name}
+      password: ${spring.security.user.password}
+  profiles:
+    active: native
+  rabbitmq:
+    host: ${RABBIT_HOST:47.100.242.161}
+    port: ${RABBIT_PORT:5672}
+    username: ${RABBIT_USER:guest}
+    password: ${RABBIT_PASSWORD:guest}
+    virtual-host: /
+  security:
+    user:
+      name: user
+      password: password
+info:
+  app:
+    name: ${spring.application.name}
+    artifactId: '@project.artifactId@'
+    version: '@project.version@'
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

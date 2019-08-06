@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.litchi.cloud.iot</groupId>
+  <artifactId>iot-platform</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>iot-platform</name>
+  <description>物联网平台</description>
+
+  <parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.3.RELEASE</version>
+		<relativePath/>
+  </parent>
+	
+  <properties>
+  		<output.jar.directory>/iot_jar/${project.version}</output.jar.directory>
+		<project.iot.version>0.0.1-SNAPSHOT</project.iot.version><!-- 版本号控制 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<spring.cloud.version>Greenwich.RELEASE</spring.cloud.version>
+		<spring.oauth.version>2.3.6.RELEASE</spring.oauth.version>
+		<mybatis-spring-boot-starter.version>1.3.1</mybatis-spring-boot-starter.version>
+		<mybatis-plus-boot-starter.version>2.2.0</mybatis-plus-boot-starter.version>
+		<pagehelper-spring-boot-starter>1.2.5</pagehelper-spring-boot-starter>
+		<druid-spring-boot-starter.version>1.1.0</druid-spring-boot-starter.version>
+		<fastjson.version>1.2.40</fastjson.version>
+		<json-lib.version>2.4</json-lib.version>
+		<commons.lang3.version>3.7</commons.lang3.version>
+		<commons.io.version>2.5</commons.io.version>
+		<commons-net.version>3.5</commons-net.version>
+		<imgscalr-lib.version>4.2</imgscalr-lib.version>
+		<commons-pool2.version>2.5.0</commons-pool2.version>
+		<ftp4j.version>1.7.2</ftp4j.version>
+		<springfox-swagger2.version>2.8.0</springfox-swagger2.version>
+		<poi.version>4.0.0</poi.version>
+		<poi-ooxml.version>4.0.0</poi-ooxml.version>
+		<mina-core.versioni>2.0.16</mina-core.versioni>
+		<docker.plugin.version>1.0.0</docker.plugin.version>
+		<docker.image.prefix>tianyi-cloud-zhsq</docker.image.prefix>
+		<!-- jar包输出目录 -->
+		<output.jar.directory>/iot_jar/${project.version}</output.jar.directory>
+		<!-- jar包输出目录 包含docker构建相关文件 -->
+		<!-- <output.jar.directory>/zhsq_jar/${project.version}/${project.artifactId}</output.jar.directory> -->
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>${mybatis-spring-boot-starter.version}</version>
+			</dependency>
+		<dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-freemarker</artifactId>
+    	</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<version>2.1.3.RELEASE</version>
+		</dependency>    	
+    	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>2.1.3.RELEASE</version>
+		</dependency>
+			<!-- mybatis-plus begin -->
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-boot-starter</artifactId>
+				<version>${mybatis-plus-boot-starter.version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>tomcat-jdbc</artifactId>
+						<groupId>org.apache.tomcat</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!-- mybatis-plus end -->
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper-spring-boot-starter</artifactId>
+				<version>${pagehelper-spring-boot-starter}</version>
+			</dependency>
+			<!-- 数据库连接池 -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid-spring-boot-starter</artifactId>
+				<version>${druid-spring-boot-starter.version}</version>
+			</dependency>
+			<!-- fastjson -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.json-lib</groupId>
+				<artifactId>json-lib</artifactId>
+				<version>${json-lib.version}</version>
+				<classifier>jdk15</classifier>
+			</dependency>
+			<!--常用工具类 -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons.lang3.version}</version>
+			</dependency>
+			<!--io常用工具类 -->
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons.io.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-net</groupId>
+				<artifactId>commons-net</artifactId>
+				<version>${commons-net.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.imgscalr</groupId>
+				<artifactId>imgscalr-lib</artifactId>
+				<version>${imgscalr-lib.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-pool2</artifactId>
+				<version>${commons-pool2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>it.sauronsoftware.ftp4j</groupId>
+				<artifactId>ftp4j</artifactId>
+				<version>${ftp4j.version}</version>
+			</dependency>
+			<!-- swagger2 begin -->
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>${springfox-swagger2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger-ui</artifactId>
+				<version>${springfox-swagger2.version}</version>
+			</dependency>
+			<!-- swagger2 end -->
+			<!-- 用于excel导入 -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>${poi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml</artifactId>
+				<version>${poi-ooxml.version}</version>
+			</dependency>
+
+			<!--easypoi导出excel -->
+			<!--easypoi-base 导入导出的工具包,可以完成Excel导出,导入,Word的导出,Excel的导出功能 -->
+			<dependency>
+				<groupId>org.jeecg</groupId>
+				<artifactId>easypoi-base</artifactId>
+				<version>${easypoi.version}</version>
+			</dependency>
+			<!--easypoi-web 耦合了spring-mvc 基于AbstractView,极大的简化spring-mvc下的导出功能 -->
+			<dependency>
+				<groupId>org.jeecg</groupId>
+				<artifactId>easypoi-web</artifactId>
+				<version>${easypoi.version}</version>
+			</dependency>
+			<!--easypoi-annotation 基础注解包,作用与实体对象上,拆分后方便maven多工程的依赖管理 -->
+			<dependency>
+				<groupId>org.jeecg</groupId>
+				<artifactId>easypoi-annotation</artifactId>
+				<version>${easypoi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.mina</groupId>
+				<artifactId>mina-core</artifactId>
+				<version>${mina-core.versioni}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring.cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+  <modules>
+    <module>iot-authentication</module>
+  	<module>iot-registry</module>
+  	<module>iot-config</module>
+  	<module>iot-gateway</module>
+  	<module>iot-system</module>
+  	<module>iot-business</module>
+  	<module>iot-common</module>
+  </modules>
+</project>

@@ -1,0 +1,19 @@
+eureka:
+  instance:
+    ip-address: ${GATEWAY_SERVER_IP:127.0.0.1}
+spring:
+  application:
+    name: iot-gateway
+  cloud:
+    config:
+      uri: http://${CONFIG_SERVER_IP:127.0.0.1}:${CONFIG_SERVER_PORT:9002}
+      fail-fast: true
+      username: ${CONFIG_SERVER_USER:user}
+      password: ${CONFIG_SERVER_PASSWORD:password}
+      name: iot-gateway,system-config
+      profile: dev
+      retry:
+        initial-interval: 2000
+        max-interval: 10000
+        multiplier: 2
+        max-attempts: 10
