@@ -69,6 +69,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		loginUser.setOrganId(user.getOrganId());
 		loginUser.setOrganCode(user.getOrganCode());
 		loginUser.setOrganPath(user.getOrganPath());
+		loginUser.setPurviews(user.getPurviews());
 		return loginUser;
 	}
 	

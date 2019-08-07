@@ -11,10 +11,11 @@
         <result column="password" property="password" />
         <result column="username" property="username" />
         <result column="organ_id" property="organId" />
+        <result column="purviews" property="purviews" />
     </resultMap>
     
     <sql id="Base_Column_List">
-    	id,create_time,modify_time,name,password,username,organ_id
+    	id,create_time,modify_time,name,password,username,organ_id,purviews
     </sql>
 	
 	<select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
