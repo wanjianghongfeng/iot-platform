@@ -60,7 +60,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-			.withClient("browser").authorizedGrantTypes("refresh_token", "password").scopes("ui")
+			.withClient("browser").secret(bCryptPasswordEncoder.encode(SECURITY_OAUTH2_CLIENT_CLIENTSECRET)).authorizedGrantTypes("refresh_token", "password").scopes("ui")
 				.accessTokenValiditySeconds(TOKEN_VALIDITY_SECONDS).refreshTokenValiditySeconds(TOKEN_REFRESH_SECONDS)
 			.and().withClient("iot-business").secret(bCryptPasswordEncoder.encode(SECURITY_OAUTH2_CLIENT_CLIENTSECRET)) .authorizedGrantTypes("client_credentials", "refresh_token").scopes("server")
 			.and().withClient("iot-system").secret(bCryptPasswordEncoder.encode(SECURITY_OAUTH2_CLIENT_CLIENTSECRET)) .authorizedGrantTypes("client_credentials", "refresh_token").scopes("server")

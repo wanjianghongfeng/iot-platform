@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+    <!--日志文件根目录-->
+    <property name="LOG_BASE_PATH" value="/logs/iot-authentication/log.log"/>
+    <!--历史日志文件格式,自动压缩文件-->
+    <property name="LOG_HISTORY_FILENAME_PATTERN" value="%d{yyyyMMdd}.%i.log.gz"/>
+
+    <!--DEBUG-->
+    <property name="LOG_FILE_DEBUG_PATH" value="${LOG_BASE_PATH}/debug.log"/>
+    <property name="LOG_FILE_DEBUG_HISTORY_PATH" value="${LOG_BASE_PATH}/debug-${LOG_HISTORY_FILENAME_PATTERN}"/>
+
+    <!--INFO-->
+    <property name="LOG_FILE_INFO_PATH" value="${LOG_BASE_PATH}/info.log"/>
+    <property name="LOG_FILE_INFO_HISTORY_PATH" value="${LOG_BASE_PATH}/info-${LOG_HISTORY_FILENAME_PATTERN}"/>
+
+    <!--WARN-->
+    <property name="LOG_FILE_WARN_PATH" value="${LOG_BASE_PATH}/warn.log"/>
+    <property name="LOG_FILE_WARN_HISTORY_PATH" value="${LOG_BASE_PATH}/warn-${LOG_HISTORY_FILENAME_PATTERN}"/>
+
+    <!--ERROR-->
+    <property name="LOG_FILE_ERROR_PATH" value="${LOG_BASE_PATH}/error.log"/>
+    <property name="LOG_FILE_ERROR_HISTORY_PATH" value="${LOG_BASE_PATH}/error-${LOG_HISTORY_FILENAME_PATTERN}"/>
+
+    <!--SQL-->
+    <property name="LOG_FILE_SQL_PATH" value="${LOG_BASE_PATH}/sql.log"/>
+    <property name="LOG_FILE_SQL_HISTORY_PATH" value="${LOG_BASE_PATH}/sql-${LOG_HISTORY_FILENAME_PATTERN}"/>
+
+    <!--控制台输出格式-->
+    <property name="LOG_ENCODER_PATTERN_STDOUT" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p %c - %m%n"/>
+    <!--文件输出格式-->
+    <property name="LOG_ENCODER_PATTERN_FILE" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p %c - %m%n"/>
+
+    <!-- 控制台输出(需要关闭控制台吗?) -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_ENCODER_PATTERN_STDOUT}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE-DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE_DEBUG_PATH}</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_DEBUG_HISTORY_PATH}</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_ENCODER_PATTERN_FILE}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE-INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE_INFO_PATH}</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_INFO_HISTORY_PATH}</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_ENCODER_PATTERN_FILE}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE-WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE_WARN_PATH}</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_WARN_HISTORY_PATH}</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_ENCODER_PATTERN_FILE}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE-ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE_ERROR_PATH}</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_ERROR_HISTORY_PATH}</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_ENCODER_PATTERN_FILE}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE-SQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE_SQL_PATH}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_SQL_HISTORY_PATH}</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_ENCODER_PATTERN_FILE}</pattern>
+        </encoder>
+    </appender>
+  
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE-DEBUG"/>
+        <appender-ref ref="FILE-INFO"/>
+        <appender-ref ref="FILE-WARN"/>
+        <appender-ref ref="FILE-ERROR"/>
+    </root>
+
+</configuration>

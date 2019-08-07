@@ -31,6 +31,7 @@ public class ResourceServerConfigurer extends ResourceServerConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/open/**").permitAll()//开放的资源不用授权
                 .antMatchers("/oauth/**").permitAll()//开放oauth接口
+                .antMatchers("/uaa/oauth/**").permitAll()//开放oauth接口
                 .antMatchers("/actuator/**").permitAll()//开放actuator接口
                 .anyRequest().authenticated()//其他任何请求都需要授权
         ;

@@ -17,3 +17,5 @@ spring:
         max-interval: 10000
         multiplier: 2
         max-attempts: 10
+mybatis-plus:
+  mapper-locations: classpath:mybatis/*Mapper.xml

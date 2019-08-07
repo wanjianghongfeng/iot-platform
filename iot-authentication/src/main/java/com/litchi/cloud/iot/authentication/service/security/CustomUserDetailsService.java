@@ -1,5 +1,8 @@
 package com.litchi.cloud.iot.authentication.service.security;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,9 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User entity = new User();
-		entity.setUsername(username);
-		User user = userMapper.selectOne(entity);
+		User user = userMapper.selectByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException(username);
 		}
@@ -58,9 +59,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	}
 
 	private LoginUser getUserByLoginName(String username) {
-		User entity = new User();
-		entity.setUsername(username);
-		User user = userMapper.selectOne(entity);
+		User user = userMapper.selectByUsername(username);
 		LoginUser loginUser = new LoginUser();
 		loginUser.setId(user.getId());
 		loginUser.setLoginName(user.getUsername());

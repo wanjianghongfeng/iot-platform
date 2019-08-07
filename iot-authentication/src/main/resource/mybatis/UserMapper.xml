@@ -10,6 +10,17 @@
         <result column="name" property="name" />
         <result column="password" property="password" />
         <result column="username" property="username" />
+        <result column="organ_id" property="organId" />
     </resultMap>
-
+    
+    <sql id="Base_Column_List">
+    	id,create_time,modify_time,name,password,username,organ_id
+    </sql>
+	
+	<select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    	select 
+    	<include refid="Base_Column_List" />
+    	from user
+    	where username = #{username,jdbcType=VARCHAR}
+  </select>
 </mapper>

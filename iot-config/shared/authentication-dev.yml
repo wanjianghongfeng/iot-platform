@@ -1,8 +1,32 @@
 server:
-  port: 9004
+  context-path: /uaa
+  port: ${AUTHENTICATION_SERVER_PORT:9004}
+management:
+  security:
+    enabled: false
+endpoints:
+  health:
+    enabled: true
+    sensitive: false
+security:
+  user:
+    name: user
+    password: password
+eureka:
+  instance:
+    hostname: service-authentication
+    metadata-map:
+      user.name: ${security.user.name}
+      user.password: ${security.user.password}
 spring:
   application:
     name: authentication
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    ROOT: info
+    org.springframework.security.oauth2: debug
+    com.tievd.ayic.components.authentication.security: debug
 info:
   app:
     name: ${spring.application.name}
