@@ -44,8 +44,14 @@ spring:
     poolPreparedStatements: true
     maxPoolPreparedStatementPerConnectionSize: 100
     filters: stat,wall,log4j
-    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=3000
     useGlobalDataSourceStat: true
+    hikari:
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
   rabbitmq:
     host: ${RABBIT_HOST:47.100.242.161}
     port: ${RABBIT_PORT:5672}

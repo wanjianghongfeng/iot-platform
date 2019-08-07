@@ -40,10 +40,10 @@ zuul:
   retryable: true
   ignoredServices: '*'
   routes:
-    service-auth:
+    authentication:
       path: /uaa/**
-      stripPrefix: false
       sensitiveHeaders: null
+      serviceId: authentication
     system-service:
       path: /system/**
       serviceId: service-system
