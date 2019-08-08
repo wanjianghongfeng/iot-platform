@@ -15,13 +15,35 @@
     </resultMap>
     
     <sql id="Base_Column_List">
-    	id,create_time,modify_time,name,password,username,organ_id,purviews
+    	id,create_time,modify_time,name,password,username,organ_id,(select group_concat(b.resource_id) from user_role a,role_resource b where a.role_id=b.role_id and a.user_id=id) as purviews
     </sql>
 	
-	<select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    	select 
-    	<include refid="Base_Column_List" />
-    	from user
-    	where username = #{username,jdbcType=VARCHAR}
+	<select id="selectByUsername" resultType="com.litchi.cloud.iot.authentication.domain.User" parameterType="java.lang.String" >
+    	SELECT
+			u.id,
+			u.name,
+			u.password,
+			u.username,
+			(
+			SELECT
+				group_concat( b.resource_id ) 
+			FROM
+				user_role a,
+				role_resource b 
+			WHERE
+				a.role_id = b.role_id 
+				AND a.user_id = u.id 
+			) AS purviews,
+			o.id AS organId,
+			o.NAME AS organName,
+			o.organ_code AS organCode,
+			o.path AS organPath,
+			o.organ_type organType
+		FROM
+			user u,
+			organ o 
+		WHERE
+			u.organ_id = o.ID 
+			AND u.username = #{username,jdbcType=VARCHAR}
   </select>
 </mapper>
