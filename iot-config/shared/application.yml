@@ -46,10 +46,12 @@ spring:
     filters: stat,wall,log4j
     useGlobalDataSourceStat: true
     hikari:
+      minimum-idle: 5
       maximum-pool-size: 15
       auto-commit: true
+      pool-name: UserHikariCP
       idle-timeout: 30000
-      max-lifetime: 1800000
+      max-lifetime: 180000
       connection-timeout: 30000
       connection-test-query: SELECT 1
   rabbitmq:
@@ -82,7 +84,7 @@ spring:
         max-wait: -1
         max-idle: 8
         min-idle: 0
-    timeout: 5000 
+    timeout: 10000 
 authserver:
     hostname: ${AUTH_HOST:127.0.0.1}
     port: ${AUTH_PORT:9004}
