@@ -1,6 +1,6 @@
 package com.litchi.cloud.iot.authentication.mapper;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.litchi.cloud.iot.authentication.domain.Organ;
 
 /**

@@ -1,8 +1,5 @@
 package com.litchi.cloud.iot.authentication.config;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;

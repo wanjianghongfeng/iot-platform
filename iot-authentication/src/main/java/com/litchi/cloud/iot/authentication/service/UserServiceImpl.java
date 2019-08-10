@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.litchi.cloud.iot.authentication.domain.User;
 import com.litchi.cloud.iot.authentication.mapper.UserMapper;
 
@@ -23,9 +24,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void create(User user) {
-		User record = new User();
-		record.setUsername(user.getUsername());
-		User existing = userMapper.selectOne(record);
+		QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+		queryWrapper.lambda().eq(User::getUsername, user.getUsername());
+		User existing = userMapper.selectOne(queryWrapper);
 		Assert.isNull(existing, "user already exists: " + user.getUsername());
 		String hash = encoder.encode(user.getPassword());
 		user.setPassword(hash);
@@ -36,9 +37,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional(readOnly = false)
 	public void update(User user) {
-		User record = new User();
-		record.setUsername(user.getUsername());
-		User existing = userMapper.selectOne(record);
+		QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+		queryWrapper.lambda().eq(User::getUsername, user.getUsername());
+		User existing = userMapper.selectOne(queryWrapper);
 		if (existing != null) {
 			existing.setPurviews(user.getPurviews());
 		}

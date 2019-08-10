@@ -15,6 +15,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @MapperScan("com.litchi.cloud.iot.authentication.mapper") 
 @EnableDiscoveryClient
 @EnableCircuitBreaker
+@EnableFeignClients
 public class AuthenticationApp 
 {
 	public static void main(String[] args) {
