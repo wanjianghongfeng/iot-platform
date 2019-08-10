@@ -18,7 +18,7 @@ spring:
     config:
       server:
         native:
-          search-locations: file:./shared
+          search-locations: classpath:shared
       username: ${spring.security.user.name}
       password: ${spring.security.user.password}
   profiles:

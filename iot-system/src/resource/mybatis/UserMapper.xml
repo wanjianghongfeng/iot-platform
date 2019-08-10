@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litchi.cloud.iot.system.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.litchi.cloud.iot.system.domain.User">
+        <id column="id" property="id" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_time" property="modifyTime" />
+        <result column="name" property="name" />
+        <result column="password" property="password" />
+        <result column="username" property="username" />
+        <result column="purviews" property="purviews" />
+        <result column="organ_id" property="organId" />
+    </resultMap>
+
+	<select id="getPageList" parameterType="Map" resultMap="BaseResultMap">
+		select id,create_time,modify_time,name,password,username,purviews,organ_id
+		from user
+		where 1=1
+		<if test="param != null">
+			<if test="param.name != null and param.name != ''">
+				name like CONCAT('%',#{name},'%')
+			</if>
+			<if test="param.username != null and param.username != ''">
+				username like CONCAT('%',#{param.username},'%')
+			</if>
+			<if test="param.organId != null">
+				organ_id = #{param.organId}
+			</if>
+		</if>
+	</select>
+</mapper>

@@ -5,19 +5,20 @@ import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpMethod;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Component;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.sun.jersey.core.util.Base64;
 
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * 
- * @author chen
- *
- */
+/** 
+ * zuul拦截
+ * @author: tievd(wjhf) 
+ * @date: 2019年8月9日 下午7:11:03
+ * @vesion: 0.0.1
+ */ 
 @Component
 @Slf4j
 public class CustomPreZuulFilter extends ZuulFilter {
