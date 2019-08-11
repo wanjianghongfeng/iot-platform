@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.litchi.cloud.iot.system.service.IUserService;
 import com.litchi.cloud.iot.system.vo.UserVO;
+import com.litchi.iot.common.beans.MyPage;
 import com.litchi.iot.common.result.PageResult;
 import com.litchi.iot.common.result.Result;
 
@@ -68,8 +69,8 @@ public class UserController {
 	@ApiOperation(value="分页获取用户信息", notes="分页获取用户信息")
 	@ApiImplicitParam(name="UserVO", value="用户类VO", dataType="UserVO")
 	@GetMapping("/page")
-	public PageResult<UserVO> getPageList(UserVO userVO) {
-		return userService.getPageList(userVO);
+	public PageResult<UserVO> getPageList(MyPage search) {
+		return userService.getPageList(search);
 	}
 }
 

@@ -21,6 +21,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
  */
 public interface UserMapper extends BaseMapper<User> {
 
+	/** 
+	 * 分页获取用户列表
+	 * @param page
+	 * @param param
+	 * @return 
+	 * 返回类型  IPage<User> 
+	 */
 	IPage<User> getPageList(Page<UserVO> page, @Param("param") Map<String, Object> param);
 
 }

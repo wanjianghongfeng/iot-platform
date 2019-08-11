@@ -14,6 +14,7 @@
         <result column="organ_id" property="organId" />
     </resultMap>
 
+	<!-- 分页查询列表 -->
 	<select id="getPageList" parameterType="Map" resultMap="BaseResultMap">
 		select id,create_time,modify_time,name,password,username,purviews,organ_id
 		from user

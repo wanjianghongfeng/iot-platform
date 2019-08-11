@@ -3,17 +3,16 @@ package com.litchi.cloud.iot.system.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.litchi.cloud.iot.system.domain.User;
 import com.litchi.cloud.iot.system.vo.UserVO;
+import com.litchi.iot.common.beans.MyPage;
 import com.litchi.iot.common.result.PageResult;
 import com.litchi.iot.common.result.Result;
 
-/**
- * <p>
- *  服务类
- * </p>
- *
- * @author wjhf
- * @since 2019-08-08
- */
+/** 
+ * 服务类
+ * @author: wjhf-litchi
+ * @date: 2019年8月11日 下午4:55:27
+ * @vesion: 0.0.1
+ */ 
 public interface IUserService extends IService<User> {
 
 	/** 
@@ -54,6 +53,6 @@ public interface IUserService extends IService<User> {
 	 * @return 
 	 * 返回类型  PageResult<UserVO> 
 	 */
-	PageResult<UserVO> getPageList(UserVO userVO);
+	PageResult<UserVO> getPageList(MyPage search);
 
 }

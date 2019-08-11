@@ -8,6 +8,7 @@ import com.litchi.cloud.iot.system.domain.User;
 import com.litchi.cloud.iot.system.mapper.UserMapper;
 import com.litchi.cloud.iot.system.service.IUserService;
 import com.litchi.cloud.iot.system.vo.UserVO;
+import com.litchi.iot.common.beans.MyPage;
 import com.litchi.iot.common.result.PageResult;
 import com.litchi.iot.common.result.Result;
 
@@ -34,7 +35,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
 	@Override
 	public Result<String> save(UserVO userVO) {
-		User user = vOtoDomain(userVO);
+		User user = vO2Domain(userVO);
 		user.setCreateTime(new Date());
 		if(exist(user)) {
 			return Result.error("该用户已存在");
@@ -45,7 +46,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
 	@Override
 	public Result<String> update(UserVO userVO) {
-		User user = vOtoDomain(userVO);
+		User user = vO2Domain(userVO);
 		if(exist(user)) {
 			return Result.error("该用户已存在");
 		}
@@ -63,17 +64,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 	@Override
 	public Result<UserVO> getUserById(Integer id) {
 		User user = userMapper.selectById(id);
-		UserVO userVO = domaintoVO(user);
+		UserVO userVO = domain2VO(user);
 		return Result.ok(userVO);
 	}
 
 	@Override
-	public PageResult<UserVO> getPageList(UserVO userVO) {
-		Page<UserVO> page = new Page<>(userVO.getPageNo(), userVO.getPageSize());
-		IPage<User> iPage = userMapper.getPageList(page, userVO.getParam());
+	public PageResult<UserVO> getPageList(MyPage search) {
+		Page<UserVO> page = new Page<>(search.getPageNo(), search.getPageSize());
+		IPage<User> iPage = userMapper.getPageList(page, search.getParam());
 		List<UserVO> userLst = new ArrayList<>();
 		for(User u : iPage.getRecords()) {
-			userLst.add(domaintoVO(u));
+			userLst.add(domain2VO(u));
 		}
 		return new PageResult<>(userLst, iPage.getTotal());
 	}
@@ -81,7 +82,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 	private boolean exist(User user) {
 		QueryWrapper<User> wrapper = new QueryWrapper<>();
 		wrapper.lambda().eq(User::getUsername, user.getUsername());
-		if(StringUtils.isEmpty(user.getId())) {
+		if(!StringUtils.isEmpty(user.getId())) {
 			wrapper.lambda().eq(false, User::getId, user.getId());	
 		}
 		int count = userMapper.selectCount(wrapper);
@@ -90,7 +91,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 		}else return false;
 	}
 
-	private User vOtoDomain(UserVO userVO) {
+	private User vO2Domain(UserVO userVO) {
 		User user = new User();
 		user.setId(userVO.getId());
 		user.setCreateTime(userVO.getCreateTime());
@@ -103,7 +104,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 		return user;
 	}
 	
-	private UserVO domaintoVO(User userVO) {
+	private UserVO domain2VO(User userVO) {
 		UserVO user = new UserVO();
 		user.setId(userVO.getId());
 		user.setCreateTime(userVO.getCreateTime());
@@ -112,7 +113,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 		user.setUsername(userVO.getUsername());
 		user.setOrganId(userVO.getOrganId());
 		user.setPassword(userVO.getPassword());
-		user.setPurviews(userVO.getPassword());
+		user.setPurviews(userVO.getPurviews());
 		return user;
 	}
 }
