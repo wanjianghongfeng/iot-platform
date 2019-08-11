@@ -4,20 +4,21 @@ eureka:
   instance:
     hostname: iot-system
     metadata-map:
-      user.name: ${security.user.name}
-      user.password: ${security.user.password}
-security:
-  user:
-    name: user
-    password: password
-  oauth2:
-    client:
-      clientId: iot-system
-      grant-type: client_credentials
-      scope: server
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+
 spring:
   application:
     name: iot-system
+  security:
+    user:
+      name: user
+      password: password
+    oauth2:
+      client:
+        clientId: iot-system
+        grant-type: client_credentials
+        scope: server
 logging:
   config: classpath:logback-spring.xml
   level:
