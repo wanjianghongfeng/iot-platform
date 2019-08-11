@@ -1,22 +1,36 @@
 package com.litchi.cloud.iot.authentication;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
+import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
-import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
-import com.baomidou.mybatisplus.generator.config.rules.DbType;
+import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 public class MpGenerator {
 	 
     public static void main(String[] args) {
 //        assert (false) : "代码生成属于危险操作，请确定配置后取消断言执行代码生成！";
         AutoGenerator mpg = new AutoGenerator();
- 
+        InjectionConfig injectionConfig = new InjectionConfig() {
+            //自定义属性注入:abc
+            //在.ftl(或者是.vm)模板中，通过${cfg.abc}获取属性
+            @Override
+            public void initMap() {
+                Map<String, Object> map = new HashMap<>();
+                map.put("abc", this.getConfig().getGlobalConfig().getAuthor() + "-mp");
+                this.setMap(map);
+            }
+        };
+        //配置自定义属性注入
+        mpg.setCfg(injectionConfig);
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         gc.setAuthor("wjhf");
@@ -26,6 +40,7 @@ public class MpGenerator {
         gc.setEnableCache(false);// XML 二级缓存
         gc.setBaseResultMap(true);// XML ResultMap
         gc.setBaseColumnList(false);// XML columList
+        gc.setDateType(DateType.ONLY_DATE);
         /* 自定义文件命名，注意 %s 会自动填充表实体属性！ */
         // gc.setMapperName("%sDao");
         // gc.setXmlName("%sDao");
@@ -37,16 +52,8 @@ public class MpGenerator {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.MYSQL);
-        dsc.setTypeConvert(new MySqlTypeConvert() {
-            // 自定义数据库表字段类型转换【可选】
-            @Override
-            public DbColumnType processTypeConvert(String fieldType) {
-                System.out.println("转换类型：" + fieldType);
-                // 注意！！processTypeConvert 存在默认类型转换，如果不是你要的效果请自定义返回、非如下直接返回。
-                return super.processTypeConvert(fieldType);
-            }
-        });
-        dsc.setDriverName("com.mysql.jdbc.Driver");
+        dsc.setTypeConvert(new MySqlTypeConvert());
+        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("root");
         dsc.setUrl("jdbc:mysql://47.100.242.161:3306/lmp?useUnicode=true&characterEncoding=utf8");
@@ -58,7 +65,8 @@ public class MpGenerator {
         //strategy.setTablePrefix(new String[] { "user_" });// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setInclude(new String[] { "user","role","organ" }); // 需要生成的表
+        strategy.setInclude(new String[] { "user","role","organ","resource"}); // 需要生成的表
+        strategy.setEntityLombokModel(true);
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表
         // 自定义实体父类
         // strategy.setSuperEntityClass("com.baomidou.demo.TestEntity");
@@ -82,7 +90,7 @@ public class MpGenerator {
  
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.litchi.cloud.iot.authentication");
+        pc.setParent("com.litchi.cloud.iot.system");
         pc.setEntity("domain");
         pc.setMapper("mapper");
         // pc.setModuleName("test");
