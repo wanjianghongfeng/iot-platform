@@ -1,12 +1,12 @@
 eureka:
   instance:
-    ip-address: ${AUTHENTICATION_SERVER_IP:127.0.0.1}
+    ip-address: ${AUTHENTICATION_SERVER_IP:47.98.137.88}
 spring:
   application:
     name: authentication
   cloud:
     config:
-      uri: http://${CONFIG_SERVER_IP:127.0.0.1}:${CONFIG_SERVER_PORT:9002}
+      uri: http://${CONFIG_SERVER_IP:47.98.137.88}:${CONFIG_SERVER_PORT:9002}
       fail-fast: true
       username: ${CONFIG_SERVER_USER:user}
       password: ${CONFIG_SERVER_PASSWORD:password}
