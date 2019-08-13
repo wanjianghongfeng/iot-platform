@@ -14,7 +14,7 @@
 	<!-- 分页查询列表 -->
 	<select id="getPageList" parameterType="Map" resultMap="BaseResultMap">
 		select id,name,remark,seq,pid
-		from user
+		from role
 		where 1=1
 		<if test="param != null">
 			<if test="param.name != null and param.name != ''">

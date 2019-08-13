@@ -37,6 +37,11 @@ public class UserController {
 	public Result<LoginUser> user(Principal user, @PathVariable("userType") Integer userType) {
 		return customUserDetailsService.getUserByLoginName(user.getName(), userType);
 	}
+	
+	@GetMapping("/uaa/users/current")
+	public Principal getUser(Principal user) {
+		return user;
+	}
 
 	@PutMapping("/logouting")
 	public Result<String> logouting(@RequestParam("accessToken") String accessToken) {

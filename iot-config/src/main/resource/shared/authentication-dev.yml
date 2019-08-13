@@ -14,13 +14,17 @@ security:
     password: password
 eureka:
   instance:
-    hostname: service-authentication
+    hostname: authentication
     metadata-map:
       user.name: ${security.user.name}
       user.password: ${security.user.password}
 spring:
   application:
     name: authentication
+  security: 
+    user:
+      name: user
+      password: password
 logging:
   config: classpath:logback-spring.xml
   level:

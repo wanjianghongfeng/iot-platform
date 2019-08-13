@@ -57,4 +57,12 @@ public interface IOrganService extends IService<Organ> {
 	 */
 	PageResult<OrganVO> getPageList(MyPage search);
 
+	/** 
+	 * 获取机构树
+	 * @param organId
+	 * @return 
+	 * 返回类型  OrganVO 
+	 */
+	OrganVO getTreeList(Integer organId);
+
 }

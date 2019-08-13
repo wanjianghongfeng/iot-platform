@@ -1,5 +1,5 @@
 server:
-  port: ${SYSTEM_SERVER_PORT:9005}
+  port: ${SYSTEM_SERVER_PORT:23707}
 eureka:
   instance:
     hostname: iot-system
@@ -19,6 +19,7 @@ spring:
         clientId: iot-system
         grant-type: client_credentials
         scope: server
+        client-secret: litchiStudio
 logging:
   config: classpath:logback-spring.xml
   level:

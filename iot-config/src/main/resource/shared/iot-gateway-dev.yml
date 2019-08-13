@@ -19,8 +19,8 @@ eureka:
 spring:
   security:
     user:
-      name: ${GATEWAY_SERVER_USER:user}
-      password: ${GATEWAY_SERVER_PASSWORD:password}
+      name: user
+      password: password
 hystrix:
   command:
     default:
@@ -42,17 +42,15 @@ zuul:
   routes:
     authentication:
       path: /uaa/**
-      sensitiveHeaders: null
-      serviceId: authentication
-    system-service:
-      path: /system/**
-      serviceId: service-system
       sensitiveHeaders:
-    service-business:
+      serviceId: authentication
+      custom-sensitive-headers: true
+    iot-system:
+      path: /system/**
+      serviceId: iot-system
+      sensitiveHeaders:
+      custom-sensitive-headers: true
+    iot-business:
       path: /business/**
-      serviceId: service-business
-      sensitiveHeaders: null
-    service-collection:
-      path: /collection/**
-      serviceId: service-collection
-      sensitiveHeaders: 
+      serviceId: iot-business
+      sensitiveHeaders:

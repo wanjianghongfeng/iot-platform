@@ -51,4 +51,10 @@ public class OrganServiceImpl extends ServiceImpl<OrganMapper, Organ> implements
 		return null;
 	}
 
+	@Override
+	public OrganVO getTreeList(Integer organId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -1,6 +1,8 @@
 package com.litchi.cloud.iot.system.controller;
 
 
+import java.util.LinkedHashMap;
+
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.litchi.cloud.iot.system.service.IOrganService;
@@ -17,6 +20,7 @@ import com.litchi.cloud.iot.system.vo.OrganVO;
 import com.litchi.iot.common.beans.MyPage;
 import com.litchi.iot.common.result.PageResult;
 import com.litchi.iot.common.result.Result;
+import com.litchi.iot.common.utils.WebContextUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -70,5 +74,17 @@ public class OrganController {
 	public PageResult<OrganVO> getPageList(MyPage search) {
 		return organService.getPageList(search);
 	}
+	
+	@GetMapping("/treeList")
+    public Result getOrganTreeList(@RequestParam(value = "organId", required = false) Integer organId) {
+        // 获取登陆用户机构ID
+        LinkedHashMap<String, Object> currPrincipal = WebContextUtil.getCurrPrincipal();
+        if (organId == null) {
+        	organId = Integer.valueOf(currPrincipal.get("organId").toString());
+        }
+        OrganVO rootOrganVO = organService.getTreeList(organId);
+        return Result.ok(rootOrganVO);
+    }
+
 }
 

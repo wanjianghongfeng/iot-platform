@@ -90,7 +90,6 @@ authserver:
     port: ${AUTH_PORT:9004}
     contextPath: /uaa
     globalUrl: http://${GATEWAY_SERVER_IP:127.0.0.1}:${GATEWAY_SERVER_PORT:9003}/uaa/oauth/token
-
 security:
   oauth2:
     resource:
