@@ -61,7 +61,8 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
 				.accessTokenValiditySeconds(TOKEN_VALIDITY_SECONDS).refreshTokenValiditySeconds(TOKEN_REFRESH_SECONDS)
 			.and().withClient("iot-business").secret(bCryptPasswordEncoder.encode(SECURITY_OAUTH2_CLIENT_CLIENTSECRET)) .authorizedGrantTypes("client_credentials", "refresh_token").scopes("server")
 			.and().withClient("iot-system").secret(bCryptPasswordEncoder.encode(SECURITY_OAUTH2_CLIENT_CLIENTSECRET)) .authorizedGrantTypes("client_credentials", "refresh_token").scopes("server")
-			.and().withClient("iot-access").secret(bCryptPasswordEncoder.encode(SECURITY_OAUTH2_CLIENT_CLIENTSECRET)) .authorizedGrantTypes("client_credentials", "refresh_token").scopes("server")
+			.and().withClient("iot-device").secret(bCryptPasswordEncoder.encode(SECURITY_OAUTH2_CLIENT_CLIENTSECRET)) .authorizedGrantTypes("client_credentials", "refresh_token").scopes("server")
+			.and().withClient("iot-bimserver").secret(bCryptPasswordEncoder.encode(SECURITY_OAUTH2_CLIENT_CLIENTSECRET)) .authorizedGrantTypes("client_credentials", "refresh_token").scopes("server")
 		    .and().withClient("common-client").secret(bCryptPasswordEncoder.encode(SECURITY_OAUTH2_CLIENT_CLIENTSECRET)) .authorizedGrantTypes("client_credentials", "refresh_token").scopes("server");
 	}
 

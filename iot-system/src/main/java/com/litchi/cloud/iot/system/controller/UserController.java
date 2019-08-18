@@ -68,8 +68,8 @@ public class UserController {
 
 	@ApiOperation(value="分页获取用户信息", notes="分页获取用户信息")
 	@ApiImplicitParam(name="UserVO", value="用户类VO", dataType="UserVO")
-	@GetMapping("/page")
-	public PageResult<UserVO> getPageList(MyPage search) {
+	@PostMapping("/page")
+	public PageResult<UserVO> getPageList(@RequestBody MyPage search) {
 		return userService.getPageList(search);
 	}
 }

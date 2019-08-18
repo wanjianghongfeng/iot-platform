@@ -88,6 +88,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		resourceVO.setSeq(resource.getSeq());
 		resourceVO.setType(resource.getType());
 		resourceVO.setUrl(resource.getUrl());
+		resourceVO.setIcon(resource.getIcon());
 		return resourceVO;
 	}
 }

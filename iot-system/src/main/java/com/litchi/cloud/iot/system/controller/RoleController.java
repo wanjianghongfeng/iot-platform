@@ -66,8 +66,8 @@ public class RoleController {
 
 	@ApiOperation(value="分页获取角色信息", notes="分页获取角色信息")
 	@ApiImplicitParam(name="RoleVO", value="角色类VO", dataType="RoleVO")
-	@GetMapping("/page")
-	public PageResult<RoleVO> getPageList(MyPage search) {
+	@PostMapping("/page")
+	public PageResult<RoleVO> getPageList(@RequestBody MyPage search) {
 		return roleService.getPageList(search);
 	}
 }

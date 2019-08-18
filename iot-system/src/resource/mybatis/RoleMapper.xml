@@ -18,7 +18,7 @@
 		where 1=1
 		<if test="param != null">
 			<if test="param.name != null and param.name != ''">
-				name like CONCAT('%',#{name},'%')
+				AND name like CONCAT('%',#{name},'%')
 			</if>
 		</if>
 	</select>

@@ -2,7 +2,7 @@
 <configuration>
 
     <!--日志文件根目录-->
-    <property name="LOG_BASE_PATH" value="/logs/iot-gateway/log.log"/>
+    <property name="LOG_BASE_PATH" value="/logs/iot-gateway"/>
     <!--历史日志文件格式,自动压缩文件-->
     <property name="LOG_HISTORY_FILENAME_PATTERN" value="%d{yyyyMMdd}.%i.log.gz"/>
 

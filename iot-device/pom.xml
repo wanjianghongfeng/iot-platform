@@ -7,10 +7,10 @@
     <artifactId>iot-platform</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>iot-system</artifactId>
-  <name>iot-system</name>
+  <artifactId>iot-device</artifactId>
+  <name>iot-device</name>
   <url>http://maven.apache.org</url>
-  <description>系统服务</description>
+  <description>设备服务</description>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -174,3 +174,4 @@
 		</plugins>
 	</build>
 </project>
+

@@ -81,7 +81,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
 		QueryWrapper<Role> wrapper = new QueryWrapper<>();
 		wrapper.lambda().eq(Role::getName, role.getName());
 		if(!StringUtils.isEmpty(role.getName())) {
-			wrapper.lambda().eq(false, Role::getId, role.getId());
+			wrapper.lambda().ne(Role::getId, role.getId());
 		}
 		int count = roleMapper.selectCount(wrapper);
 		if(count>0) {

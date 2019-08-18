@@ -70,8 +70,8 @@ public class OrganController {
 
 	@ApiOperation(value="分页获取机构信息", notes="分页获取机构信息")
 	@ApiImplicitParam(name="OrganVO", value="机构类VO", dataType="OrganVO")
-	@GetMapping("/page")
-	public PageResult<OrganVO> getPageList(MyPage search) {
+	@PostMapping("/page")
+	public PageResult<OrganVO> getPageList(@RequestBody MyPage search) {
 		return organService.getPageList(search);
 	}
 	

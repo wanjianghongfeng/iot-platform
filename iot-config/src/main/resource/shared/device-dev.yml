@@ -1,15 +1,15 @@
 server:
-  port: ${SYSTEM_SERVER_PORT:9005}
+  port: ${DEVICE_SERVER_PORT:23707}
 eureka:
   instance:
-    hostname: iot-system
+    hostname: iot-device
     metadata-map:
       user.name: ${spring.security.user.name}
       user.password: ${spring.security.user.password}
 
 spring:
   application:
-    name: iot-system
+    name: iot-device
   security:
     user:
       name: user
@@ -20,7 +20,7 @@ spring:
         access-token-uri: http://47.100.242.161:9004/oauth/token
         client-secret: litchiStudio
         grant-type: client_credentials
-        client-id: iot-system
+        client-id: iot-device
 logging:
   config: classpath:logback-spring.xml
   level:

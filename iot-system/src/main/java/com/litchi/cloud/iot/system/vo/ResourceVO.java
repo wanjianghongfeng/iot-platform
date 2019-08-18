@@ -57,6 +57,8 @@ public class ResourceVO {
      * 页面地址
      */
     private String pageUrl;
+
+    private String icon;
     
     private List<ResourceVO> chil;
 }

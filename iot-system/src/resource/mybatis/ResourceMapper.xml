@@ -13,11 +13,12 @@
         <result column="pid" property="pid" />
         <result column="type" property="type" />
         <result column="page_url" property="pageUrl" />
+        <result column="icon" property="icon" />
     </resultMap>
 
 	<!-- 获取用户资源 -->
     <select id="getResourceListByUserId" resultType="java.lang.Integer" resultMap="BaseResultMap">
-        select a.id,a.name,a.remark,a.seq,a.url,a.method,a.pid,a.type,a.page_url,a.type from resource a ,role_resource b,user_role c
+        select a.id,a.name,a.remark,a.seq,a.url,a.method,a.pid,a.type,a.page_url,a.type, a.icon from resource a ,role_resource b,user_role c
         where a.id=b.resource_id and b.role_id=c.role_id and c.user_id=#{userId,jdbcType=INTEGER} ORDER BY a.pid,a.seq
     </select>
 </mapper>

@@ -70,7 +70,7 @@ public final class WebContextUtil {
 		LinkedHashMap<String, Object> map = null;
 		map = getCurrPrincipal();
 		if (map != null) {
-			return Integer.valueOf(map.get("userId").toString());
+			return Integer.valueOf(map.get("id").toString());
 		}
 		return null;
 	}

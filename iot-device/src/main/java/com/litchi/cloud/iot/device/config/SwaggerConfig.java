@@ -1,4 +1,4 @@
-package com.litchi.cloud.iot.system.config;
+package com.litchi.cloud.iot.device.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +32,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.litchi.cloud.iot.system.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.litchi.cloud.iot.device.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -44,7 +44,7 @@ public class SwaggerConfig {
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("System系统服务API文档")
+                .title("Device设备服务API文档")
                 .description("system service API Doc")
                 .termsOfServiceUrl("http://www.baidu.com")
                 .version("0.0.1")

@@ -21,13 +21,13 @@
 		where 1=1
 		<if test="param != null">
 			<if test="param.name != null and param.name != ''">
-				name like CONCAT('%',#{name},'%')
+				AND name like CONCAT('%',#{name},'%')
 			</if>
 			<if test="param.username != null and param.username != ''">
-				username like CONCAT('%',#{param.username},'%')
+				AND username like CONCAT('%',#{param.username},'%')
 			</if>
 			<if test="param.organId != null">
-				organ_id = #{param.organId}
+				AND organ_id = #{param.organId}
 			</if>
 		</if>
 	</select>

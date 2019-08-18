@@ -235,5 +235,6 @@
   	<module>iot-system</module>
   	<module>iot-business</module>
   	<module>iot-common</module>
+    <module>iot-device</module>
   </modules>
 </project>

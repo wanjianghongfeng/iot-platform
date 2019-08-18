@@ -86,16 +86,11 @@ spring:
         min-idle: 0
     timeout: 10000 
 authserver:
-    hostname: ${AUTH_HOST:127.0.0.1}
+    hostname: ${AUTH_HOST:47.100.242.161}
     port: ${AUTH_PORT:9004}
     contextPath: /uaa
-    globalUrl: http://${GATEWAY_SERVER_IP:127.0.0.1}:${GATEWAY_SERVER_PORT:9003}/uaa/oauth/token
+    globalUrl: http://${GATEWAY_SERVER_IP:47.100.242.161}:${GATEWAY_SERVER_PORT:9003}/uaa/oauth/token
 security:
   oauth2:
     resource:
       user-info-uri: http://${authserver.hostname}:${authserver.port}${authserver.contextPath}/users/current
-pagehelper:
-  helperDialect: mysql
-  reasonable: true
-  supportMethodsArguments: true
-  params: count=countSql

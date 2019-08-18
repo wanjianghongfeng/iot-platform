@@ -83,7 +83,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 		QueryWrapper<User> wrapper = new QueryWrapper<>();
 		wrapper.lambda().eq(User::getUsername, user.getUsername());
 		if(!StringUtils.isEmpty(user.getId())) {
-			wrapper.lambda().eq(false, User::getId, user.getId());	
+			wrapper.lambda().ne(User::getId, user.getId());	
 		}
 		int count = userMapper.selectCount(wrapper);
 		if(count > 0) {

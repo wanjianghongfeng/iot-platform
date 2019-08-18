@@ -13,6 +13,28 @@
         <result column="parent_id" property="parentId" />
         <result column="create_user_id" property="createUserId" />
         <result column="organ_type" property="organType" />
+        <result column="longitude" property="longitude" />
+        <result column="latitude" property="latitude" />
     </resultMap>
+    
+    <select id="getPageList" parameterType="Map" resultMap="BaseResultMap">
+    	select id, name, organ_code, create_time, update_time, path, parent_id, create_user_id, organ_type, longitude, latitude
+    	from organ
+    	where 1=1
+		<if test="param != null">
+			<if test="param.name != null and param.name != ''">
+				AND name like CONCAT('%',#{name},'%')
+			</if>
+			<if test="param.path != null and param.path != ''">
+				AND path like CONCAT('%',#{param.path},'%')
+			</if>
+			<if test="param.organCode != null">
+				AND organ_code = #{param.organCode}
+			</if>
+			<if test="param.parentId != null">
+				AND parent_id = #{param.parentId}
+			</if>
+		</if>
+    </select>
 
 </mapper>
