@@ -26,11 +26,11 @@ logging:
   level:
     ROOT: info
     org.springframework.security.oauth2: debug
-pagehelper:
-  helperDialect: mysql
-  reasonable: true
-  supportMethodsArguments: true
-  params: count=countSql
+info:
+  app:
+    name: ${spring.application.name}
+    artifactId: '@project.artifactId@'
+    version: '@project.version@'
 #mybatis
 mybatis-plus:
   mapper-locations: classpath:mybatis/*Mapper.xml

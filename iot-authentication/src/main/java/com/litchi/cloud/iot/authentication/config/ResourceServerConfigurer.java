@@ -29,7 +29,18 @@ public class ResourceServerConfigurer extends ResourceServerConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .and()
                 .authorizeRequests()
-                .anyRequest().permitAll()//其他任何请求都需要授权
+    			.antMatchers(
+    					"/webjars/**",
+    	          		"/resources/**",
+    	          		"/swagger-ui.html",
+    	          		"/swagger-resources/**",
+    	            	"/v2/api-docs",
+    	            	"/druid/**",
+    	            	"/health/**",
+    	            	"/info",
+    	            	"/logouting")
+    			.permitAll()
+                .anyRequest().authenticated()//其他任何请求都需要授权
         ;
     }
 
