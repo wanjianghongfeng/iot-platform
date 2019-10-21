@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.litchi.cloud.iot.system.domain.RoleResource;
 import com.litchi.cloud.iot.system.domain.User;
+import com.litchi.cloud.iot.system.domain.UserRole;
 import com.litchi.cloud.iot.system.mapper.UserMapper;
+import com.litchi.cloud.iot.system.mapper.UserRoleMapper;
 import com.litchi.cloud.iot.system.service.IUserService;
 import com.litchi.cloud.iot.system.vo.UserVO;
 import com.litchi.iot.common.beans.MyPage;
@@ -15,9 +18,12 @@ import com.litchi.iot.common.result.Result;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -32,6 +38,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 	
 	@Resource
 	private UserMapper userMapper;
+	@Resource
+	private UserRoleMapper userRoleMapper;
+
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    
+    /** 
+     * @Fields defaultPassword : 默认密码
+     */ 
+    @Value("${lmp.default-password}")
+    private String defaultPassword;
 
 	@Override
 	public Result<String> save(UserVO userVO) {
@@ -116,4 +132,53 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 		user.setPurviews(userVO.getPurviews());
 		return user;
 	}
+
+    @Override
+    public void grant(Integer userId, Set<Integer> roleIdSet) {
+        User user = userMapper.selectById(userId);
+        if (user != null) {
+            // 先删除
+        	QueryWrapper<UserRole> wrapper = new QueryWrapper<>();
+        	wrapper.lambda().eq(UserRole::getUserId, userId);
+            userRoleMapper.delete(wrapper);
+            // 批量保存
+            userRoleMapper.batchSaveUserRole(userId, roleIdSet);
+        }
+    }
+
+	@Override
+	public List<Integer> getUserRoles(Integer userId) {
+        return userRoleMapper.getUserRoles(userId);
+	}
+
+	@Override
+    public Result<String> updatePwd(Integer userId, String oldPwd, String newPwd) {
+        User oldUser = userMapper.selectById(userId);
+        if (oldUser == null) {
+            return Result.error("账号不存在");
+        }
+        // 这里进行base64解密
+        // Base64
+        // String decoderOldPwd = Base64Util.decoder(oldPwd);
+        // String newPwdNecoder = Base64Util.decoder(newPwd);
+        if (!encoder.matches(oldPwd, oldUser.getPassword())) {
+            return Result.error("原密码不正确");
+        }
+        oldUser.setPassword(encoder.encode(newPwd));
+        // 修改密码
+        userMapper.updateById(oldUser);
+        return Result.ok();
+    }
+
+    @Override
+    public Result<String> resetPwd(Integer userId) {
+        User oldUser = userMapper.selectById(userId);
+        if (oldUser == null) {
+            return Result.error("账号不存在");
+        }
+        oldUser.setPassword(encoder.encode(defaultPassword));
+        // 修改密码
+        userMapper.updateById(oldUser);
+        return Result.ok();
+    }
 }

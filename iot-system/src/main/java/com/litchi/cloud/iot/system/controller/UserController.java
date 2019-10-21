@@ -1,6 +1,9 @@
 package com.litchi.cloud.iot.system.controller;
 
 
+import java.util.List;
+import java.util.Set;
+
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
 import com.litchi.cloud.iot.system.service.IUserService;
+import com.litchi.cloud.iot.system.vo.UserPwdVO;
 import com.litchi.cloud.iot.system.vo.UserVO;
 import com.litchi.iot.common.beans.MyPage;
 import com.litchi.iot.common.result.PageResult;
@@ -72,5 +77,55 @@ public class UserController {
 	public PageResult<UserVO> getPageList(@RequestBody MyPage search) {
 		return userService.getPageList(search);
 	}
+
+    /**
+       * 授权
+     *
+     * @param userId 用户ID
+     * @param userVO
+     * @return
+     */
+    @PutMapping(value = "/grant/{userId}")
+    public Result grant(@PathVariable("userId") Integer userId, @RequestBody UserVO userVO) {
+        Set<Integer> roleIdSet = userVO.getRoleIdSet();
+        if (roleIdSet == null || roleIdSet.size() <= 0) {
+            return Result.error("角色不能为空");
+        }
+        userService.grant(userId, roleIdSet);
+        return Result.ok("授权成功！");
+    }
+    
+    /**
+     * 获取权限
+     *
+     * @param userId 用户ID
+     * @return
+     */
+    @GetMapping(value = "/role/{userId}")
+    public Result<List<Integer>> getUserRole(@PathVariable("userId") Integer userId) {
+        List<Integer> userRoles = userService.getUserRoles(userId);
+        return Result.ok(userRoles);
+    }
+
+    /**
+     * 修改密码
+     *
+     * @return
+     */
+    @PutMapping("/modifyPwd/{userId}")
+    public Result<String> modifyPassword(@PathVariable("userId") Integer userId, @RequestBody UserPwdVO vo) {
+        // 修改密码
+        return userService.updatePwd(userId, vo.getOldPwd(), vo.getNewPwd());
+    }
+
+    /**
+     * 重置密码
+     *
+     * @return
+     */
+    @PutMapping("/resetPwd/{userId}")
+    public Result<String> resetPassword(@PathVariable("userId") Integer userId) {
+        return userService.resetPwd(userId);
+    }
 }
 

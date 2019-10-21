@@ -1,5 +1,7 @@
 package com.litchi.cloud.iot.system.vo;
 
+import java.util.Set;
+
 import com.litchi.iot.common.beans.MyPage;
 
 import io.swagger.annotations.ApiModel;
@@ -26,4 +28,6 @@ public class RoleVO extends MyPage{
     private Integer seq;
 
     private Integer pid;
+
+    private Set<Integer> resourceIdSet;
 }

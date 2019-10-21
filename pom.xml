@@ -236,5 +236,6 @@
   	<module>iot-business</module>
   	<module>iot-common</module>
     <module>iot-device</module>
+    <module>iot-bimserver</module>
   </modules>
 </project>

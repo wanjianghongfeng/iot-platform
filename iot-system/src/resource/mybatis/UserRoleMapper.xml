@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litchi.cloud.iot.system.mapper.UserRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.litchi.cloud.iot.system.domain.UserRole">
+        <id column="user_id" property="userId" />
+        <result column="role_id" property="roleId" />
+    </resultMap>
+    
+    <!-- 批量保存角色资源 -->
+    <insert id="batchSaveUserRole">
+        insert into user_role(user_id, role_id) values
+        <foreach collection="roleIdSet" item="item" separator=",">
+            (#{userId,jdbcType=INTEGER},#{item,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+
+    <select id="getUserRoles" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select DISTINCT role_id from user_role where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
+</mapper>

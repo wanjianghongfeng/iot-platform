@@ -1,5 +1,8 @@
 package com.litchi.cloud.iot.system.service;
 
+import java.util.List;
+import java.util.Set;
+
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.litchi.cloud.iot.system.domain.User;
 import com.litchi.cloud.iot.system.vo.UserVO;
@@ -54,5 +57,39 @@ public interface IUserService extends IService<User> {
 	 * 返回类型  PageResult<UserVO> 
 	 */
 	PageResult<UserVO> getPageList(MyPage search);
+
+	/** 
+	 * 授权
+	 * @param userId
+	 * @param roleIdSet 
+	 * 返回类型  void 
+	 */
+	void grant(Integer userId, Set<Integer> roleIdSet);
+
+	/** 
+	 * 获取用户角色
+	 * @param userId
+	 * @return 
+	 * 返回类型  List<Integer> 
+	 */
+	List<Integer> getUserRoles(Integer userId);
+
+	/** 
+	 * 修改密码
+	 * @param userId
+	 * @param oldPwd
+	 * @param newPwd
+	 * @return 
+	 * 返回类型  Result<String> 
+	 */
+	Result<String> updatePwd(Integer userId, String oldPwd, String newPwd);
+
+	/** 
+	 * 重置密码
+	 * @param userId
+	 * @return 
+	 * 返回类型  Result<String> 
+	 */
+	Result<String> resetPwd(Integer userId);
 
 }

@@ -1,6 +1,7 @@
 package com.litchi.cloud.iot.system.vo;
 
 import java.util.Date;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.litchi.iot.common.beans.MyPage;
@@ -43,4 +44,7 @@ public class UserVO extends MyPage{
     
     @ApiModelProperty(value="机构id", name="organId")
     private Integer organId;
+
+    @ApiModelProperty(value="角色id", name="roleIdSet")
+    private Set<Integer> roleIdSet;
 }

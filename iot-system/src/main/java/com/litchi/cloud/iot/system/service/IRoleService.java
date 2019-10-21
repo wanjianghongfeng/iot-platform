@@ -5,6 +5,10 @@ import com.litchi.cloud.iot.system.vo.RoleVO;
 import com.litchi.iot.common.beans.MyPage;
 import com.litchi.iot.common.result.PageResult;
 import com.litchi.iot.common.result.Result;
+
+import java.util.List;
+import java.util.Set;
+
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -56,5 +60,21 @@ public interface IRoleService extends IService<Role> {
 	 * 返回类型  PageResult<RoleVO> 
 	 */
 	PageResult<RoleVO> getPageList(MyPage search);
+
+	/** 
+	 * 授权
+	 * @param roleId
+	 * @param resourceIdSet 
+	 * 返回类型  void 
+	 */
+	void grant(Integer roleId, Set<Integer> resourceIdSet);
+
+	/** 
+	 * 获取角色资源
+	 * @param roleId
+	 * @return 
+	 * 返回类型  List<Integer> 
+	 */
+	List<Integer> getRoleResources(Integer roleId);
 
 }

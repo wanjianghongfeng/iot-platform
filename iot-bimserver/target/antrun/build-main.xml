@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <copy todir="/iot_jar/0.0.1-SNAPSHOT">
+    <fileset dir="F:\IoTPlatform\iot-platform\iot-bimserver\target">
+      <include name="iot-bimserver.jar"/>
+    </fileset>
+  </copy>
+  <copy todir="/iot_jar/0.0.1-SNAPSHOT">
+    <fileset dir="F:\IoTPlatform\iot-platform\iot-bimserver">
+      <include name="Dockerfile"/>
+    </fileset>
+  </copy>
+</target>
+</project>

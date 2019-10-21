@@ -1,6 +1,9 @@
 package com.litchi.cloud.iot.system.controller;
 
 
+import java.util.List;
+import java.util.Set;
+
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -70,5 +73,33 @@ public class RoleController {
 	public PageResult<RoleVO> getPageList(@RequestBody MyPage search) {
 		return roleService.getPageList(search);
 	}
+
+    /**
+      * 授权
+     *
+     * @param roleId 角色ID
+     * @param roleVO 资源
+     * @return
+     */
+    @PutMapping(value = "/grant/{roleId}")
+    public Result<String> grant(@PathVariable("roleId") Integer roleId, @RequestBody RoleVO roleVO) {
+        Set<Integer> resourceIdSet = roleVO.getResourceIdSet();
+        if (resourceIdSet == null || resourceIdSet.size() <= 0) {
+            return Result.error("资源不能为空");
+        }
+        roleService.grant(roleId, resourceIdSet);
+        return Result.ok();
+    }
+
+    /**
+     * 获取角色资源
+     *
+     * @return
+     */
+    @GetMapping("/resources/{roleId}")
+    public Result<List<Integer>> getRoleResources(@PathVariable("roleId") Integer roleId) {
+        List<Integer> roleResources = roleService.getRoleResources(roleId);
+        return Result.ok(roleResources);
+    }
 }
 

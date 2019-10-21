@@ -1,7 +1,9 @@
 package com.litchi.cloud.iot.system.service.impl;
 
 import com.litchi.cloud.iot.system.domain.Role;
+import com.litchi.cloud.iot.system.domain.RoleResource;
 import com.litchi.cloud.iot.system.mapper.RoleMapper;
+import com.litchi.cloud.iot.system.mapper.RoleResourceMapper;
 import com.litchi.cloud.iot.system.service.IRoleService;
 import com.litchi.cloud.iot.system.vo.RoleVO;
 import com.litchi.iot.common.beans.MyPage;
@@ -14,6 +16,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -33,6 +36,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
 	
 	@Resource
 	private RoleMapper roleMapper;
+	@Resource
+	private RoleResourceMapper roleResourceMapper;
 
 	@Override
 	public Result<String> save(RoleVO roleVO) {
@@ -107,5 +112,24 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
 		roleVO.setSeq(role.getSeq());
 		roleVO.setPid(role.getPid());
 		return roleVO;
+	}
+	
+
+    @Override
+    public void grant(Integer roleId, Set<Integer> resourceIdSet) {
+        Role role = roleMapper.selectById(roleId);
+        if (role != null) {
+        	QueryWrapper<RoleResource> wrapper = new QueryWrapper<>();
+        	wrapper.lambda().eq(RoleResource::getRoleId, roleId);
+            // 先删除
+            roleResourceMapper.delete(wrapper);
+            // 批量保存
+            roleResourceMapper.batchSaveRoleResource(roleId, resourceIdSet);
+        }
+    }
+
+	@Override
+	public List<Integer> getRoleResources(Integer roleId) {
+        return roleResourceMapper.getRoleResources(roleId);
 	}
 }

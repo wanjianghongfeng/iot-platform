@@ -1,6 +1,6 @@
 eureka:
   instance:
-    ip-address: ${SYSTEM_SERVER_IP:25t66171o0.zicp.vip}
+    ip-address: ${SYSTEM_SERVER_IP:127.0.0.1}
 server:
   port: 23707
 spring:
@@ -19,4 +19,6 @@ spring:
         max-interval: 10000
         multiplier: 2
         max-attempts: 10
+lmp:
+  default-password: admin123456
   
