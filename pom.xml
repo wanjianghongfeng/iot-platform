@@ -28,7 +28,7 @@
 		<mybatis-plus-boot-starter.version>3.1.1</mybatis-plus-boot-starter.version>
 		<pagehelper-spring-boot-starter>1.2.5</pagehelper-spring-boot-starter>
 		<druid-spring-boot-starter.version>1.1.0</druid-spring-boot-starter.version>
-		<fastjson.version>1.2.40</fastjson.version>
+		<fastjson.version>1.2.83</fastjson.version>
 		<json-lib.version>2.4</json-lib.version>
 		<commons.lang3.version>3.7</commons.lang3.version>
 		<commons.io.version>2.5</commons.io.version>
