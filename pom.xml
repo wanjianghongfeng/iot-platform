@@ -37,7 +37,7 @@
 		<commons-pool2.version>2.5.0</commons-pool2.version>
 		<ftp4j.version>1.7.2</ftp4j.version>
 		<springfox-swagger2.version>2.8.0</springfox-swagger2.version>
-		<poi.version>4.0.0</poi.version>
+		<poi.version>4.1.1</poi.version>
 		<poi-ooxml.version>4.0.0</poi-ooxml.version>
 		<mina-core.versioni>2.0.16</mina-core.versioni>
 		<docker.plugin.version>1.0.0</docker.plugin.version>
