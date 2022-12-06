@@ -32,7 +32,7 @@
 		<json-lib.version>2.4</json-lib.version>
 		<commons.lang3.version>3.7</commons.lang3.version>
 		<commons.io.version>2.5</commons.io.version>
-		<commons-net.version>3.5</commons-net.version>
+		<commons-net.version>3.9.0</commons-net.version>
 		<imgscalr-lib.version>4.2</imgscalr-lib.version>
 		<commons-pool2.version>2.5.0</commons-pool2.version>
 		<ftp4j.version>1.7.2</ftp4j.version>
